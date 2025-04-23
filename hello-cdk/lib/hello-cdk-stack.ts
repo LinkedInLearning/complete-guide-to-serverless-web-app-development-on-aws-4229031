@@ -29,5 +29,24 @@ export class HelloCdkStack extends cdk.Stack {
     new apigateway.LambdaRestApi(this, 'HelloApi', {
       handler: lambdaFunction,
     });
+
+    const newLambdaFunction = new NodejsFunction(this, 'NewFunction', {
+      entry: path.join(__dirname, 'functions/new.ts'), // Use entry instead of code
+      handler: 'handler', // Function name in the Lambda file
+      runtime: Runtime.NODEJS_20_X,
+      
+      // Bundle configuration
+      bundling: {
+        minify: true,         // Minify code
+        sourceMap: true,      // Include source maps
+        externalModules: [    // Modules that should be excluded from bundling
+            'aws-sdk',
+        ],
+      }
+    });
+
+    new apigateway.LambdaRestApi(this, 'NewApi', {
+      handler: newLambdaFunction,
+    });
   }
 }
