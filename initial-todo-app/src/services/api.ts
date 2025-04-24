@@ -16,16 +16,50 @@ const realApi = {
     password: string;
     name: string;
   }) {
-        // TO IMPLEMENT
-
+    try {
+      await signUp({
+        username: credentials.email,
+        password: credentials.password,
+        options: {
+          userAttributes: {
+            email: credentials.email,
+            name: credentials.name,
+          },
+        },
+      });
+      
+      return { success: true };
+    } catch (error: any) {
+      if (error.name === 'UsernameExistsException') {
+        throw new Error('Email already registered');
+      }
+      throw new Error(error.message || 'Registration failed');
+    }
   },
 
   async verifyEmail(email: string, code: string) {
-    // TO IMPLEMENT
+    try {
+      await confirmSignUp({
+        username: email,
+        confirmationCode: code,
+      });
+      
+      return { success: true };
+    } catch (error: any) {
+      if (error.name === 'CodeMismatchException') {
+        throw new Error('Invalid verification code');
+      }
+      throw new Error(error.message || 'Verification failed');
+    }
   },
 
   async resendVerificationCode(email: string) {
-      // TO IMPLEMENT
+    try {
+      await resendSignUpCode({ username: email });
+      return { success: true };
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to resend verification code');
+    }
   },
 
   async getTodos(token: string) {  
@@ -69,3 +103,15 @@ export const {
   updateTodo,
   deleteTodo,
 } = IS_MOCK ? mockApi : realApi;
+
+function confirmSignUp(arg0: { username: string; confirmationCode: string; }) {
+  throw new Error('Function not implemented.');
+}
+function resendSignUpCode(arg0: { username: string; }) {
+  throw new Error('Function not implemented.');
+}
+
+function signUp(arg0: { username: string; password: string; options: { userAttributes: { email: string; name: string; }; }; }) {
+  throw new Error('Function not implemented.');
+}
+
