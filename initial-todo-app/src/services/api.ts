@@ -11,7 +11,27 @@ const IS_MOCK = config.isMock; // Toggle this to switch between mock and real AP
 const realApi = {
   async loginUser(email: string, password: string) {
 
-    // TO IMPLEMENT
+    try {
+      await signIn({ username: email, password });
+      const session = await fetchAuthSession();
+      const user = await getCurrentUser();
+
+      return {
+        user: {
+          
+          id: user.userId,
+          email: user.username,
+          name: user.signInDetails?.loginId || email,
+          verified: true, 
+        },
+        token: session.tokens?.idToken?.toString(),
+      };
+    } catch (error: any) {
+      if (error.name === 'UserNotConfirmedException') {
+        throw new Error('Please verify your email first');
+      }
+      throw new Error(error.message || 'Login failed');
+    }    
     
   },
 
@@ -116,6 +136,18 @@ function resendSignUpCode(arg0: { username: string; }) {
 }
 
 function signUp(arg0: { username: string; password: string; options: { userAttributes: { email: string; name: string; }; }; }) {
+  throw new Error('Function not implemented.');
+}
+
+function signIn(arg0: { username: string; password: string; }) {
+  throw new Error('Function not implemented.');
+}
+
+function fetchAuthSession() {
+  throw new Error('Function not implemented.');
+}
+
+function getCurrentUser() {
   throw new Error('Function not implemented.');
 }
 
