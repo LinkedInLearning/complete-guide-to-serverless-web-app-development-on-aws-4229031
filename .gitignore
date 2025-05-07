@@ -1,3 +1,4 @@
 package-lock.json
 .DS_Store
 hello-cdk/dist/
+voting-graphql-webapp/.env
