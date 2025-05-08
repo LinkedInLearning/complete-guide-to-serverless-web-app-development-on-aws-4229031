@@ -20,6 +20,7 @@
     "typescript": "~5.6.3"
   },
   "dependencies": {
+    "@aws-amplify/graphql-api-construct": "^1.20.1",
     "@aws-cdk/aws-amplify-alpha": "^2.190.0-alpha.0",
     "aws-cdk-lib": "2.190.0",
     "constructs": "^10.0.0"

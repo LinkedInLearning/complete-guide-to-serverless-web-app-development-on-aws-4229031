@@ -10,6 +10,7 @@ interface AmplifyStackProps extends StackProps {
 	readonly userPoolId: string;
 	readonly userPoolClientId: string;
 	readonly identityPoolId: string;
+    readonly appsyncURL: string;
 }
 
 export class AmplifyHostingStack extends Stack {
@@ -30,7 +31,7 @@ export class AmplifyHostingStack extends Stack {
                 IDENTITY_POOL_ID: props.identityPoolId,
                 USER_POOL_ID: props.userPoolId,
                 USER_POOL_CLIENT_ID: props.userPoolClientId,
-                SERVER_URL: 'TBD'
+                SERVER_URL: props.appsyncURL
             }
         });
 
