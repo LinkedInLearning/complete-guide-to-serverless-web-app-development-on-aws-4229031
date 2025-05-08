@@ -225,6 +225,17 @@ export type DeleteFeatureMutation = {
   } | null,
 };
 
+export type SendFeatureMutationVariables = {
+  email?: string | null,
+  id: string,
+  text?: string | null,
+  voteCount?: number | null,
+};
+
+export type SendFeatureMutation = {
+  sendFeature: boolean | null,
+};
+
 export type UpdateFeatureMutationVariables = {
   condition?: ModelFeatureConditionInput | null,
   input: UpdateFeatureInput,

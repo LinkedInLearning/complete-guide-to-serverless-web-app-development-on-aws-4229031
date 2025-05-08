@@ -5,7 +5,7 @@ import { generateClient } from 'aws-amplify/api';
 import { auth } from './auth';
 import { listFeatures } from '../../graphql/queries'
 import { CreateFeatureInput, FeatureStatus, UpdateFeatureInput } from './graphqlAPI';
-import { createFeature, updateFeature, /* sendFeature*/ } from '../../graphql/mutations';
+import { createFeature, updateFeature, sendFeature } from '../../graphql/mutations';
 
 export class RealApiService implements ApiService {
   
@@ -56,17 +56,23 @@ export class RealApiService implements ApiService {
   }
 
   async notifyMe(featureId: string, text: string, currentVotes: number) : Promise<void> { // COMPLETE
-    console.log('notify me', featureId)
-
     const client = generateClient();
 
-    /*await client.graphql({
+    const user = await auth.getCurrentUser();
+    const email = user.signInDetails?.loginId || '';
+    console.log('email', email);
+
+    const response = await client.graphql({
       query: sendFeature,
       variables: {
-        featureId
+        id: featureId,
+        text: text,
+        voteCount: currentVotes, 
+        email: email
       }});
-*/
-    return;
+
+    console.log('response', response.data.sendFeature);
+    return response.data.sendFeature;
   }
 
   async login(email: string, password: string) : Promise<LoginResponse> {

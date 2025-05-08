@@ -35,6 +35,16 @@ export const deleteFeature = /* GraphQL */ `
     }
   }
 `;
+export const sendFeature = /* GraphQL */ `
+  mutation SendFeature(
+    $email: String
+    $id: ID!
+    $text: String
+    $voteCount: Int
+  ) {
+    sendFeature(email: $email, id: $id, text: $text, voteCount: $voteCount)
+  }
+`;
 export const updateFeature = /* GraphQL */ `
   mutation UpdateFeature(
     $condition: ModelFeatureConditionInput
