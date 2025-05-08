@@ -1,15 +1,15 @@
 // NOTE: Uncomment as you implement each function
 
-//import { ApiService, Feature, LoginResponse } from './types';
-//import { generateClient } from 'aws-amplify/api';
-//import { auth } from './auth';
-//import { listFeatures } from '../../graphql/queries'
-//import { CreateFeatureInput, FeatureStatus, UpdateFeatureInput } from './graphqlAPI';
-//import { createFeature, updateFeature, sendFeature } from '../../graphql/mutations';
+import { ApiService, Feature, LoginResponse } from './types';
+import { generateClient } from 'aws-amplify/api';
+import { auth } from './auth';
+import { listFeatures } from '../../graphql/queries'
+import { CreateFeatureInput, FeatureStatus, UpdateFeatureInput } from './graphqlAPI';
+import { createFeature, updateFeature, /* sendFeature*/ } from '../../graphql/mutations';
 
-//export class RealApiService implements ApiService {
+export class RealApiService implements ApiService {
   
-  /*async createFeature(text: string, userId: string) : Promise<Feature> {
+  async createFeature(text: string, userId: string) : Promise<Feature> {
     const client = generateClient();
 
     const input : CreateFeatureInput= {
@@ -29,16 +29,16 @@
   
     const newFeature = response.data.createFeature
     return newFeature;
-  }*/
+  }
 
-  /*async getFeatures(): Promise<Feature[]> {
+  async getFeatures(): Promise<Feature[]> {
     const client = generateClient();
     const response = await client.graphql({ query: listFeatures });
     const features = response.data?.listFeatures?.items
     return features;
-  }*/
+  }
   
-  /*async voteForFeature(featureId: string, currentVotes: number) : Promise<void> {
+  async voteForFeature(featureId: string, currentVotes: number) : Promise<void> {
     const client = generateClient();
     const incVotes = currentVotes + 1
     const input : UpdateFeatureInput= {
@@ -53,39 +53,39 @@
       }});
 
     return;
-  }*/
+  }
 
-  /*async notifyMe(featureId: string, text: string, currentVotes: number) : Promise<void> { // COMPLETE
+  async notifyMe(featureId: string, text: string, currentVotes: number) : Promise<void> { // COMPLETE
     console.log('notify me', featureId)
 
     const client = generateClient();
 
-    await client.graphql({
+    /*await client.graphql({
       query: sendFeature,
       variables: {
         featureId
       }});
-
+*/
     return;
-  }*/
+  }
 
-  /*async login(email: string, password: string) : Promise<LoginResponse> {
+  async login(email: string, password: string) : Promise<LoginResponse> {
     return auth.loginUser(email, password);
-  }*/
+  }
 
-  /*async register(email: string, password: string): Promise<void> {
+  async register(email: string, password: string): Promise<void> {
     auth.registerUser(email, password);
-  }*/
+  }
   
-  /*async confirmEmail(email: string, code: string) : Promise<Boolean>{
+  async confirmEmail(email: string, code: string) : Promise<Boolean>{
     return auth.verifyEmail(email, code);
-  }*/
+  }
 
-  /*async resendConfirmationCode(email: string): Promise<void> {
+  async resendConfirmationCode(email: string): Promise<void> {
     return auth.resendVerificationCode(email);
-  }*/
+  }
 
-  /*async logout() : Promise<void> {
+  async logout() : Promise<void> {
     await auth.logout();
-  }*/
-//}
+  }
+}

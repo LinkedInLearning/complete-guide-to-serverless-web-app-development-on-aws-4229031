@@ -1,0 +1,267 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Feature {
+  createdAt: AWSDateTime!
+  endTime: AWSDateTime!
+  id: ID!
+  owner: String!
+  status: FeatureStatus!
+  text: String!
+  updatedAt: AWSDateTime!
+  voteCount: Int
+}
+
+type ModelFeatureConnection {
+  items: [Feature]!
+  nextToken: String
+}
+
+type Mutation {
+  createFeature(condition: ModelFeatureConditionInput, input: CreateFeatureInput!): Feature
+  deleteFeature(condition: ModelFeatureConditionInput, input: DeleteFeatureInput!): Feature
+  updateFeature(condition: ModelFeatureConditionInput, input: UpdateFeatureInput!): Feature
+}
+
+type Query {
+  getFeature(id: ID!): Feature
+  listFeatures(filter: ModelFeatureFilterInput, limit: Int, nextToken: String): ModelFeatureConnection
+}
+
+type Subscription {
+  onCreateFeature(filter: ModelSubscriptionFeatureFilterInput): Feature @aws_subscribe(mutations : ["createFeature"])
+  onDeleteFeature(filter: ModelSubscriptionFeatureFilterInput): Feature @aws_subscribe(mutations : ["deleteFeature"])
+  onUpdateFeature(filter: ModelSubscriptionFeatureFilterInput): Feature @aws_subscribe(mutations : ["updateFeature"])
+}
+
+enum FeatureStatus {
+  CLOSED
+  OPEN
+}
+
+enum ModelAttributeTypes {
+  _null
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+input AmplifyAIConversationTurnErrorInput {
+  errorType: String!
+  message: String!
+}
+
+input CreateFeatureInput {
+  createdAt: AWSDateTime
+  endTime: AWSDateTime!
+  id: ID
+  owner: String!
+  status: FeatureStatus!
+  text: String!
+  voteCount: Int
+}
+
+input DeleteFeatureInput {
+  id: ID!
+}
+
+input ModelBooleanInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  eq: Boolean
+  ne: Boolean
+}
+
+input ModelFeatureConditionInput {
+  and: [ModelFeatureConditionInput]
+  createdAt: ModelStringInput
+  endTime: ModelStringInput
+  not: ModelFeatureConditionInput
+  or: [ModelFeatureConditionInput]
+  owner: ModelStringInput
+  status: ModelFeatureStatusInput
+  text: ModelStringInput
+  updatedAt: ModelStringInput
+  voteCount: ModelIntInput
+}
+
+input ModelFeatureFilterInput {
+  and: [ModelFeatureFilterInput]
+  createdAt: ModelStringInput
+  endTime: ModelStringInput
+  id: ModelIDInput
+  not: ModelFeatureFilterInput
+  or: [ModelFeatureFilterInput]
+  owner: ModelStringInput
+  status: ModelFeatureStatusInput
+  text: ModelStringInput
+  updatedAt: ModelStringInput
+  voteCount: ModelIntInput
+}
+
+input ModelFeatureStatusInput {
+  eq: FeatureStatus
+  ne: FeatureStatus
+}
+
+input ModelFloatInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  between: [Float]
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+}
+
+input ModelIDInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+input ModelSizeInput {
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+input ModelStringInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionBooleanInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input ModelSubscriptionFeatureFilterInput {
+  and: [ModelSubscriptionFeatureFilterInput]
+  createdAt: ModelSubscriptionStringInput
+  endTime: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  or: [ModelSubscriptionFeatureFilterInput]
+  owner: ModelSubscriptionStringInput
+  status: ModelSubscriptionStringInput
+  text: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  voteCount: ModelSubscriptionIntInput
+}
+
+input ModelSubscriptionFloatInput {
+  between: [Float]
+  eq: Float
+  ge: Float
+  gt: Float
+  in: [Float]
+  le: Float
+  lt: Float
+  ne: Float
+  notIn: [Float]
+}
+
+input ModelSubscriptionIDInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  in: [ID]
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+  notIn: [ID]
+}
+
+input ModelSubscriptionIntInput {
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  in: [Int]
+  le: Int
+  lt: Int
+  ne: Int
+  notIn: [Int]
+}
+
+input ModelSubscriptionStringInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  in: [String]
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+  notIn: [String]
+}
+
+input UpdateFeatureInput {
+  createdAt: AWSDateTime
+  endTime: AWSDateTime
+  id: ID!
+  owner: String
+  status: FeatureStatus
+  text: String
+  voteCount: Int
+}
