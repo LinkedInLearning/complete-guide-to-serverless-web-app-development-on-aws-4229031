@@ -1,0 +1,18 @@
+type Feature 
+    @model
+    @auth(rules: [ 
+    {allow: public, operations:[read], provider: identityPool},
+    {allow: private, operations:[create, read, update], provider: identityPool}]) {
+    id: ID!
+    text: String!
+    createdAt: AWSDateTime!
+    endTime: AWSDateTime!
+    status: FeatureStatus!
+    voteCount: Int
+    owner: String!
+}
+
+enum FeatureStatus {
+  OPEN
+  CLOSED
+}
