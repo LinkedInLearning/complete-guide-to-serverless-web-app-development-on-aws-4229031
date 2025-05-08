@@ -11,7 +11,8 @@ const cognitoStack = new CognitoStack(app, 'VotingWebAppCognitoStack', {});
 const appsyncStack = new AppSyncStack(app, 'VotingWebAppAppSyncStack', {
     identityPoolId: cognitoStack.identityPoolId.value,
     authenticatedRoleArn: cognitoStack.authenticatedRoleArn.value,
-    unauthenticatedRoleArn: cognitoStack.unauthenticatedRoleArn.value
+    unauthenticatedRoleArn: cognitoStack.unauthenticatedRoleArn.value,
+    snsTopicArn: cognitoStack.snsTopicArn.value
 });
 
 const amplifyStack = new AmplifyHostingStack(app, 'VotingWebAppAmplifyStack', {

@@ -12,6 +12,12 @@ type Feature
     owner: String!
 }
 
+type Mutation {
+  sendFeature(id: ID!, text: String, voteCount: Int, email: String) : Boolean
+    @function(name: "SendFeatureLambdaVotingWebApp")
+    @auth(rules: [ {allow: private, provider: identityPool}])
+}
+
 enum FeatureStatus {
   OPEN
   CLOSED

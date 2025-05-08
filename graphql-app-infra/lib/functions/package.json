@@ -1,0 +1,16 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "main": "postConfirmation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "types": "./postConfirmation.d.ts",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-sns": "^3.804.0"
+  }
+}
