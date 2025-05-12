@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { Function, Code, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Function, Code, Runtime, FunctionUrlAuthType } from 'aws-cdk-lib/aws-lambda';
 import * as path from 'path';
 
 export class MigrateToServerlessStack extends cdk.Stack {
@@ -12,6 +12,16 @@ export class MigrateToServerlessStack extends cdk.Stack {
       runtime: Runtime.NODEJS_22_X,
       handler: 'test-lambda.handler',
       code: Code.fromAsset(path.join(__dirname, 'functions')),
+    });
+
+    // Lambda function url
+    const lambdaFunctionUrl = lambdaFunction.addFunctionUrl({
+      authType: FunctionUrlAuthType.NONE,
+    });
+
+    new cdk.CfnOutput(this, 'LambdaFunctionUrlOutput', {
+      value: lambdaFunctionUrl.url,
+      description: 'Lambda function url',
     });
   }
 }
