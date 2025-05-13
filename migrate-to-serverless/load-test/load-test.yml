@@ -1,0 +1,19 @@
+config:
+  target: "https://fmaohcz76hqp33ke6kx3oecj7y0rdjsg.lambda-url.eu-west-1.on.aws"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm up"
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 50
+      name: "Ramp up load"
+    - duration: 120
+      arrivalRate: 100
+      name: "Sustained load"
+
+scenarios:
+  - name: 'Test the API'
+    flow:
+      - get:
+          url: "/"
