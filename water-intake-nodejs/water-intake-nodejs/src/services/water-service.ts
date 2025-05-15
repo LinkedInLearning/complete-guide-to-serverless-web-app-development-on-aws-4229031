@@ -22,4 +22,8 @@ export class WaterService {
   async getIntakeById(id: string): Promise<WaterIntake | null> {
     return this.repository.getById(id);
   }
+
+  async getLastIntake(userId: string): Promise<WaterIntake | null> {
+    return this.repository.getLastIntake(userId);
+  }
 }

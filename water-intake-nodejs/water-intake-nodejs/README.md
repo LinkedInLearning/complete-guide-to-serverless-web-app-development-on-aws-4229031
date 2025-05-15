@@ -97,6 +97,12 @@ curl http://localhost:8080/water/invalid-id
    docker build -t water-tracking-api .
    ```
 
+Build if you don't have the linux/amd64 architecture locally.
+
+```bash
+docker buildx build --platform linux/amd64 -t water-tracking-api .
+```
+
 2. Run the container:
    ```bash
    docker run -p 8080:8080 water-tracking-api

@@ -26,4 +26,12 @@ export class MockWaterRepository implements WaterRepository {
     const intake = this.intakes.find(i => i.id === id);
     return intake || null;
   }
+
+  async getLastIntake(userId: string): Promise<WaterIntake | null> {
+    const intakes = this.intakes.filter(i => i.userId === userId);
+    if (intakes.length === 0) return null;
+    return intakes.reduce((latest, current) => 
+      current.timestamp > latest.timestamp ? current : latest
+    );
+  }
 }

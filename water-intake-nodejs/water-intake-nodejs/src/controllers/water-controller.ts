@@ -48,4 +48,17 @@ export class WaterController {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+
+  getLastIntake = async (req: Request, res: Response) => {
+    try {
+      const userId = req.params.userId;
+      if (!userId) {
+        return res.status(400).json({ error: 'userId is required' });
+      }
+      const intake = await this.service.getLastIntake(userId);
+      res.json(intake);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
 }

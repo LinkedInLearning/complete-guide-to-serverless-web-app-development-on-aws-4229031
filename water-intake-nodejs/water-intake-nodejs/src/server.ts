@@ -16,8 +16,9 @@ const waterController = new WaterController(waterService);
 app.post('/water', waterController.addIntake);
 app.get('/water/user/:userId/last-30-days', waterController.getLast30Days);
 app.get('/water/:id', waterController.getById);
+app.get('/water/user/:userId/last', waterController.getLastIntake);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`The server running on port ${port}`);
 });
